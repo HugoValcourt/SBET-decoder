@@ -2,7 +2,7 @@
  * Copyright 2017 © Centre Interdisciplinaire de développement en Cartographie des Océans (CIDCO), Tous droits réservés
  */
 
-/* 
+/*
  * File:   SbetPrinterTest.hpp
  * Author: jordan
  */
@@ -21,7 +21,12 @@ double absoluteDifference(double a, double b) {
 }
 
 TEST_CASE("Accuracy Test") {
-    std::string binexec("build/bin/accuracy-decoder");
+
+  #ifdef _WIN32
+          std::string binexec("build/bin/accuracy-decoder.exe");
+  #else
+          std::string binexec("build/bin/accuracy-decoder");
+  #endif
     std::string file(" test/data/20181023accuracy.out");
 
     CommandLineExecutor exec;
@@ -34,7 +39,7 @@ TEST_CASE("Accuracy Test") {
     for (int i = 0; i < 10; i++) {
         ss >> header;
     }
-    
+
     double Time;
     double NorthingSD;
     double EastingSD;
@@ -45,13 +50,13 @@ TEST_CASE("Accuracy Test") {
     double RollSd;
     double PitchSd;
     double HeadingSd;
-    
+
     ss >> Time >> NorthingSD >> EastingSD >> AltitudeSD >> SpeedNorthSD >> SpeedEastSD >> SpeedAltitudeSD >> RollSd >> PitchSd >> HeadingSd;
     double eps = 1e-9;
-    
+
     //Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD RollSd PitchSd HeadingSd
     //225092.532698 0.023356 0.023366 0.018463 0.005244 0.005267 0.004156 0.002758 0.002759 0.044579
-    
+
     REQUIRE(absoluteDifference(Time, 225092.532698) < eps);
     REQUIRE(absoluteDifference(NorthingSD, 0.023356) < eps);
     REQUIRE(absoluteDifference(EastingSD, 0.023366) < eps);
@@ -62,12 +67,16 @@ TEST_CASE("Accuracy Test") {
     REQUIRE(absoluteDifference(RollSd, 0.002758) < eps);
     REQUIRE(absoluteDifference(PitchSd, 0.002759) < eps);
     REQUIRE(absoluteDifference(HeadingSd, 0.044579) < eps);
-    
+
 }
 
 TEST_CASE("Sbet Test") {
 
-    std::string binexec("build/bin/sbet-decoder");
+  #ifdef _WIN32
+          std::string binexec("build/bin/sbet-decoder.exe");
+  #else
+          std::string binexec("build/bin/sbet-decoder");
+  #endif
     std::string file(" test/data/20181023.out");
 
     CommandLineExecutor exec;
@@ -127,4 +136,3 @@ TEST_CASE("Sbet Test") {
 }
 
 #endif /* SBETPRINTERTEST_HPP */
-
