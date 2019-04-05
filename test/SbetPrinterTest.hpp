@@ -23,7 +23,7 @@ double absoluteDifference(double a, double b) {
 TEST_CASE("Accuracy Test") {
 
   #ifdef _WIN32
-          std::string binexec("build/bin/accuracy-decoder.exe");
+          std::string binexec("build\\bin\\accuracy-decoder.exe");
   #else
           std::string binexec("build/bin/accuracy-decoder");
   #endif
@@ -73,7 +73,7 @@ TEST_CASE("Accuracy Test") {
 TEST_CASE("Sbet Test") {
 
   #ifdef _WIN32
-          std::string binexec("build/bin/sbet-decoder.exe");
+          std::string binexec("build\\bin\\sbet-decoder.exe");
   #else
           std::string binexec("build/bin/sbet-decoder");
   #endif
