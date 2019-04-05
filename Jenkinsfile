@@ -43,7 +43,6 @@ pipeline {
         bat "Scripts\\change_makefile_name.bat"
         //compile
         bat "make test"
-        bat "make"
 
         archiveArtifacts('build\\bin\\sbet-decoder.exe')
         archiveArtifacts('build\\bin\\accuracy-decoder.exe')
