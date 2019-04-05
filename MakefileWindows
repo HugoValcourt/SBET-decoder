@@ -1,7 +1,7 @@
 
 default:
 	mkdir build\bin
-	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\sbet-decoder.cpp /EHsc /Fesbet-decoder.exe
+	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\sbet-decoder.cpp ..\\..\\src\\SbetProcessor.cpp /EHsc /Fesbet-decoder.exe
 	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\accuracy-decoder.cpp /EHsc /Feaccuracy-decoder.exe
 test: clean default
 	mkdir build\test\reports
