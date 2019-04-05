@@ -1,10 +1,10 @@
 
 default:
-	mkdir build\bin
+	if not exist "build\bin" mkdir build\bin
 	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\sbet-decoder.cpp ..\\..\\src\\SbetProcessor.cpp /EHsc /Fesbet-decoder.exe
 	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\accuracy-decoder.cpp /EHsc /Feaccuracy-decoder.exe
 test: clean default
-	mkdir build\test\reports
+	if not exist "build\test\reports" mkdir build\test\reports
 	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test &&cl ..\\..\\test\\CatchMain.cpp /EHsc /Fetests.exe
 	build\test\tests.exe -r junit -o build\\test\\reports\\sbet-test-windows-x64-reports.xml
 
