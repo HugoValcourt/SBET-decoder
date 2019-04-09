@@ -6,6 +6,7 @@
 #include <QStringList>
 
 #include "qtsbetprocessor.h"
+#include "qtsbetprinter.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +36,7 @@ private:
     QStringList     tableHeader;
 
     QtSbetProcessor * sbet;
+    std::string openedFile;
 };
 
 #endif // MAINWINDOW_H
