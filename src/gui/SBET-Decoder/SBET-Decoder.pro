@@ -26,12 +26,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     qtsbetprocessor.cpp \
-    ../../SbetProcessor.cpp
+    ../../SbetProcessor.cpp \
+    qtsbetprinter.cpp
 
 HEADERS += \
         mainwindow.h \
     ../../SbetProcessor.hpp \
-    qtsbetprocessor.h
+    qtsbetprocessor.h \
+    qtsbetprinter.h
 
 FORMS += \
         mainwindow.ui

@@ -47,6 +47,7 @@ void MainWindow::on_actionOpen_triggered()
             tr("SBET File (*.sbet);;All Files (*)"));
 
     std::string cleanFileName = fileName.toLocal8Bit().constData();
+    openedFile = cleanFileName;
 
     QtSbetProcessor * sbet = new QtSbetProcessor(table);
     sbet->readFile(cleanFileName);
@@ -54,7 +55,16 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionExport_As_Text_triggered()
 {
-    //TODO: export as ASCII
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Export As Text"), "",
+            tr("TXT File (*.txt);;All Files (*)"));
+    std::string strFileName = fileName.toLocal8Bit().constData();
+
+    QtSbetPrinter *printer = new QtSbetPrinter (strFileName);
+    if(printer->OpenFile()){
+        printer->readFile(openedFile);
+        printer->CloseFile();
+    }
 }
 
 void MainWindow::on_actionAbout_triggered()

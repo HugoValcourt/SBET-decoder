@@ -2,7 +2,7 @@
  * Copyright 2017 © Centre Interdisciplinaire de développement en Cartographie des Océans (CIDCO), Tous droits réservés
  */
 
-/* 
+/*
  * File:   SbetPrinter.hpp
  * Author: glm,jordan
  */
@@ -45,4 +45,3 @@ class SbetPrinter: public SbetProcessor{
 };
 
 #endif /* SBETPRINTER_HPP */
-
