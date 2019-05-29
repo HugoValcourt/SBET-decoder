@@ -48,6 +48,7 @@ class SbetProcessor{
 
 		bool readFile(std::string & filename);
 		virtual void processEntry(SbetEntry * entry)=0;
+                virtual void done()=0;
 
 	private:
 		int doRead(int fd,void* buf,unsigned int sz);

@@ -42,6 +42,8 @@ class SbetPrinter: public SbetProcessor{
 				entry->zAngularRate
 			);
 		}
+                
+                void done() { }
 };
 
 #endif /* SBETPRINTER_HPP */
