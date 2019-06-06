@@ -1,0 +1,30 @@
+************************************* Invoked: Wed Jun 5 11:20:15 2019
+[0] Arguments: ./QtInstallerFramework-linux-x64.run
+[0] Operations sanity check succeeded.
+[8835] Tmp and install directories are on the same volume. Volume mount point: "/" Free space available: "358.65 GB"
+[8836] Installation space required: "149.87 MB" Temporary space required: "0.00 bytes" Local repository size: "0.00 bytes"
+[9721] perform  operation: Mkdir
+[9721] 	- arguments: /home/emile/Qt
+[9721] Done
+[9721] backup  operation: Mkdir
+[9721] 	- arguments: /home/emile/Qt/QtIFW-3.1.1
+[9722] Done
+[9722] perform  operation: Mkdir
+[9722] 	- arguments: /home/emile/Qt/QtIFW-3.1.1
+[9740] Done
+[9740] Install size: 2 components
+[9743] backup org.qtproject.ifw operation: License
+[9743] 	- arguments:
+[9743] Done
+[9743] perform org.qtproject.ifw operation: License
+[9743] 	- arguments:
+[9743] Done
+[9743] backup org.qtproject.ifw.binaries operation: Extract
+[9743] 	- arguments: installer://org.qtproject.ifw.binaries/3.1.1data.7z, /home/emile/Qt/QtIFW-3.1.1
+[9743] Done
+[9744] perform org.qtproject.ifw.binaries operation: Extract
+[9744] 	- arguments: installer://org.qtproject.ifw.binaries/3.1.1data.7z, /home/emile/Qt/QtIFW-3.1.1
+[12360] Done
+[12362] Writing maintenance tool: "/home/emile/Qt/QtIFW-3.1.1/Uninstaller.new"
+[12407] Wrote permissions for maintenance tool.
+[12615] Maintenance tool restart: false.
