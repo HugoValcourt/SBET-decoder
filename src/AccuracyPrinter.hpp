@@ -14,13 +14,24 @@
 #include <cstdio>
 #include <string>
 
+/*!
+ * \brief AccuracyPrinter class extends of AccuracyProcessor class
+ */
 class AccuracyPrinter : public AccuracyProcessor {
 public:
 
+    /**
+     * Create a AccuracyPrinter class
+     */
     AccuracyPrinter() {
         printf("Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD RollSd PitchSd HeadingSd\n");
     }
 
+    /**
+     * Print the information of the AccuracyEntry receive in parameter 
+     * 
+     * @param entry The AccuracyEntry 
+     */
     void processEntry(AccuracyEntry * entry) {
         printf("%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf\n",
                 entry->time,

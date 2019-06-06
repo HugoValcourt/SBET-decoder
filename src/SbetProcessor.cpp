@@ -33,6 +33,11 @@ int SbetProcessor::doOpen(const char * filename){
 #endif
 }
 
+/**
+ * Read a SBET file and return true if the reading was successful
+ * 
+ * @param filename name of the SBET file
+ */
 bool SbetProcessor::readFile(std::string & filename){
     int fd;
 
