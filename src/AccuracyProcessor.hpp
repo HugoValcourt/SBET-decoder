@@ -34,12 +34,33 @@ typedef struct{
 } AccuracyEntry;
 #pragma pack()
 
+/*!
+ * \brief AccuracyProcessor class
+ */
 class AccuracyProcessor{
 	public:
+                /**
+                 * Create a AccuracyProcessor
+                 */
 		AccuracyProcessor();
+                
+                /**
+                 * Destroy the AccuracyProcessor
+                 */
 		virtual ~AccuracyProcessor();
 
+                /**
+                 * Read a SBET file and return true if the reading is successful
+                 * 
+                 * @param filename the name of the SBET file
+                 */
 		bool readFile(std::string & filename);
+                
+                /**
+                 * Print the information of the AccuracyEntry
+                 * 
+                 * @param entry The AccuracyEntry
+                 */
 		virtual void processEntry(AccuracyEntry * entry)=0;
 
 	private:
@@ -47,10 +68,16 @@ class AccuracyProcessor{
 		int doOpen(const char * filename);
 };
 
+/**
+ * Create a AccuracyProcessor
+ */
 AccuracyProcessor::AccuracyProcessor(){
 
 }
 
+/**
+ * Destroy the AccuracyProcessor
+ */
 AccuracyProcessor::~AccuracyProcessor(){
 
 }
@@ -77,6 +104,11 @@ int AccuracyProcessor::doOpen(const char * filename){
 #endif
 }
 
+/**
+ * Read a SBET file and return true if reading is successful
+ * 
+ * @param filename name of the SBET file
+ */
 bool AccuracyProcessor::readFile(std::string & filename){
 	int fd;
 
