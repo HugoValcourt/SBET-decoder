@@ -20,4 +20,4 @@ doc:
 deploy:
 	
 installation:
-	Qt/QtIFW-3.1.1/bin/binarycreator -t Qt/QtIFW-3.1.1/bin/installerbase -p SBET-decoder_Directory -c SBET-decoder_Directory/config/config.xml SBET-decoder
+	../Qt/QtIFW-3.1.1/bin/binarycreator -t ../Qt/QtIFW-3.1.1/bin/installerbase -p SBET-decoder_Directory -c SBET-decoder_Directory/config/config.xml SBET-decoder
