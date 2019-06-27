@@ -46,6 +46,18 @@ public:
                 entry->headingSd / 60
                 );
     }
+    
+    /**
+     * Data is simply printed, nothing to do at the end of IO
+     * 
+     * @param entry The AccuracyEntry 
+     */
+    void done() {
+        
+    }
+    
+    
+    
 };
 
 #endif /* ACCURACYPRINTER_HPP */

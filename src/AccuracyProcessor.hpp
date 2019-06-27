@@ -62,6 +62,12 @@ class AccuracyProcessor{
                  * @param entry The AccuracyEntry
                  */
 		virtual void processEntry(AccuracyEntry * entry)=0;
+                
+                /**
+                 * Called by readFile after file is read
+                 * 
+                 */
+		virtual void done()=0;
 
 	private:
 		int doRead(int fd,void* buf,unsigned int sz);
@@ -133,6 +139,8 @@ bool AccuracyProcessor::readFile(std::string & filename){
 	if(bytesRead == -1){
 		perror("Error while reading file");
 	}
+        
+        done();
 
 	return true;
 }
