@@ -17,7 +17,7 @@
 #include "Utils/CommandLineExecutor.hpp"
 
 double absoluteDifference(double a, double b) {
-    return std::abs(std::abs(a) - std::abs(b));
+    return std::abs(a-b);
 }
 
 TEST_CASE("Accuracy Test") {
