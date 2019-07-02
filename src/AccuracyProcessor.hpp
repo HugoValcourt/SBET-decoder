@@ -20,130 +20,107 @@
 #endif
 
 #pragma pack(1)
-typedef struct{
-	double time;    	//GPS seconds of week
-	double northingSd; 	//northing standard deviation
-	double eastingSd;	//easting standard deviation
-	double altitudeSd;    	//altitude standard deviation
-	double speedNorthSd;    //northing speed standard deviation
-	double speedEastSd;    	//easting speed standard deviation
-	double speedAltitudeSd; //vertical speed standard deviation
-	double rollSd;    	//roll standard deviation
-	double pitchSd;    	//pitch standard deviation
-	double headingSd;    	//heading standard deviation
+
+typedef struct {
+    double time; //GPS seconds of week
+    double northingSd; //northing standard deviation
+    double eastingSd; //easting standard deviation
+    double altitudeSd; //altitude standard deviation
+    double speedNorthSd; //northing speed standard deviation
+    double speedEastSd; //easting speed standard deviation
+    double speedAltitudeSd; //vertical speed standard deviation
+    double rollSd; //roll standard deviation
+    double pitchSd; //pitch standard deviation
+    double headingSd; //heading standard deviation
 } AccuracyEntry;
 #pragma pack()
 
 /*!
  * \brief AccuracyProcessor class
  */
-class AccuracyProcessor{
-	public:
-                /**
-                 * Create a AccuracyProcessor
-                 */
-		AccuracyProcessor();
-                
-                /**
-                 * Destroy the AccuracyProcessor
-                 */
-		virtual ~AccuracyProcessor();
+class AccuracyProcessor {
+public:
 
-                /**
-                 * Read a SBET file and return true if the reading is successful
-                 * 
-                 * @param filename the name of the SBET file
-                 */
-		bool readFile(std::string & filename);
-                
-                /**
-                 * Print the information of the AccuracyEntry
-                 * 
-                 * @param entry The AccuracyEntry
-                 */
-		virtual void processEntry(AccuracyEntry * entry)=0;
-                
-                /**
-                 * Called by readFile after file is read
-                 * 
-                 */
-		virtual void done()=0;
+    /**
+     * Create a AccuracyProcessor
+     */
+    AccuracyProcessor() {}
 
-	private:
-		int doRead(int fd,void* buf,unsigned int sz);
-		int doOpen(const char * filename);
-};
+    /**
+     * Destroy the AccuracyProcessor
+     */
+    virtual ~AccuracyProcessor() {}
 
-/**
- * Create a AccuracyProcessor
- */
-AccuracyProcessor::AccuracyProcessor(){
+    /**
+     * Read a SBET file and return true if reading is successful
+     * 
+     * @param filename name of the SBET file
+     */
+    bool readFile(std::string & filename) {
+        int fd;
 
-}
+        if ((fd = doOpen(filename.c_str())) == -1) {
+            std::cerr << "Cannot open file " << filename << std::endl;
+            return false;
+        }
 
-/**
- * Destroy the AccuracyProcessor
- */
-AccuracyProcessor::~AccuracyProcessor(){
+        AccuracyEntry entry;
 
-}
+        int bytesRead;
 
-int AccuracyProcessor::doRead(int fd,void * buffer,unsigned int sz){
+        do {
+            bytesRead = doRead(fd, (void*) &entry, sizeof (AccuracyEntry));
 
-#ifdef _WIN32
-	return _read(fd,buffer,sz);
-#endif
+            if (bytesRead == sizeof (AccuracyEntry)) {
+                processEntry(&entry);
+            }
+        } while (bytesRead > 0);
 
-#ifdef __GNUC__
-	return read(fd,buffer,sz);
-#endif
+        if (bytesRead == -1) {
+            perror("Error while reading file");
+        }
 
-}
-
-int AccuracyProcessor::doOpen(const char * filename){
-#ifdef _WIN32
-        return _open(filename,_O_RDONLY|_O_BINARY);
-#endif
-
-#ifdef __GNUC__
-        return open(filename,O_RDONLY);
-#endif
-}
-
-/**
- * Read a SBET file and return true if reading is successful
- * 
- * @param filename name of the SBET file
- */
-bool AccuracyProcessor::readFile(std::string & filename){
-	int fd;
-
-	if((fd=doOpen(filename.c_str())) == -1){
-		std::cerr << "Cannot open file " << filename << std::endl;
-		return false;
-	}
-
-	AccuracyEntry entry;
-
-	int bytesRead;
-
-	do{
-		bytesRead = doRead(fd,(void*)&entry,sizeof(AccuracyEntry));
-
-		if(bytesRead == sizeof(AccuracyEntry)){
-			processEntry(&entry);
-		}
-	}
-	while(bytesRead > 0);
-
-	if(bytesRead == -1){
-		perror("Error while reading file");
-	}
-        
         done();
 
-	return true;
-}
+        return true;
+    }
 
+    /**
+     * Print the information of the AccuracyEntry
+     * 
+     * @param entry The AccuracyEntry
+     */
+    virtual void processEntry(AccuracyEntry * entry) = 0;
+
+    /**
+     * Called by readFile after file is read
+     * 
+     */
+    virtual void done() = 0;
+
+private:
+
+    int doRead(int fd, void * buffer, unsigned int sz) {
+
+#ifdef _WIN32
+        return _read(fd, buffer, sz);
+#endif
+
+#ifdef __GNUC__
+        return read(fd, buffer, sz);
+#endif
+
+    }
+
+    int doOpen(const char * filename) {
+#ifdef _WIN32
+        return _open(filename, _O_RDONLY | _O_BINARY);
+#endif
+
+#ifdef __GNUC__
+        return open(filename, O_RDONLY);
+#endif
+    }
+};
 
 #endif
